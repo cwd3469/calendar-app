@@ -1,6 +1,6 @@
 import React from 'react';
 
-const TodoList = () => {
+const TodoList = (): JSX.Element => {
   return <div>TodoList</div>;
 };
 export default TodoList;

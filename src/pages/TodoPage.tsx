@@ -5,10 +5,7 @@ import TodoList from '../components/Todo/TodoList';
 const TodoPage = () => {
   return (
     <Layout>
-      <>
-        <TodoList />
-        TodoPage
-      </>
+      <TodoList />
     </Layout>
   );
 };
