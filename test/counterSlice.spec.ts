@@ -1,5 +1,4 @@
-import type {
-  CounterState} from '../src/app/modules/counterSlice';
+import type { CounterState } from '../src/app/modules/counterSlice';
 import counterReducer, {
   increment,
   decrement,

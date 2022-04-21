@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
+import Layout from '../Common/Layout';
 
 const TodoTemplate = () => {
   return (
-    <div>TodoTemplate</div>
-  ) 
-}
-export default TodoTemplate
+    <Layout>
+      <div>TodoTemplate</div>
+    </Layout>
+  );
+};
+export default TodoTemplate;
