@@ -21,8 +21,8 @@ const isLocalhost = Boolean(
 );
 
 type Config = {
-  onSuccess?: (registration: ServiceWorkerRegistration) => void;
-  onUpdate?: (registration: ServiceWorkerRegistration) => void;
+  readonly onSuccess?: (registration: ServiceWorkerRegistration) => void;
+  readonly onUpdate?: (registration: ServiceWorkerRegistration) => void;
 };
 
 export function register(config?: Config) {
@@ -113,7 +113,7 @@ function checkValidServiceWorker(swUrl: string, config?: Config) {
       const contentType = response.headers.get('content-type');
       if (
         response.status === 404 ||
-        (contentType != null && contentType.indexOf('javascript') === -1)
+        (contentType != null && !contentType.includes('javascript'))
       ) {
         // No service worker found. Probably a different app. Reload the page.
         navigator.serviceWorker.ready.then((registration) => {

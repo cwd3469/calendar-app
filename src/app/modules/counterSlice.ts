@@ -1,10 +1,11 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../../app/store';
-import { fetchCount } from './counterAPI';
+import type { PayloadAction } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import type { RootState, AppThunk } from '../store';
+import { fetchCount } from '../../components/Counter/counterAPI';
 
 export interface CounterState {
-  value: number;
-  status: 'idle' | 'loading' | 'failed';
+  readonly value: number;
+  readonly status: 'idle' | 'loading' | 'failed';
 }
 
 const initialState: CounterState = {
