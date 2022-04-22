@@ -1,12 +1,12 @@
 import React from 'react';
-import Layout from '../components/Common/Layout';
+import MainLayout from '../components/Common/MainLayout';
 import TodoList from '../components/Todo/TodoList';
 
-const TodoPage = () => {
+const TodoPage = (): JSX.Element => {
   return (
-    <Layout>
+    <MainLayout>
       <TodoList />
-    </Layout>
+    </MainLayout>
   );
 };
 export default TodoPage;

@@ -1,7 +1,6 @@
 import React, { useRef, useState } from 'react';
 import '../../assets/scss/Layout.scss';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import classnames from 'classnames';
 
 import LayoutItems from './LayoutItems';
@@ -21,9 +20,7 @@ const Layout = (props: PropsTypeLayout) => {
         <div
           className={classnames('SideTab-btn', showTab ? 'showMenu' : '')}
           onClick={sideTabBtnClick}
-        >
-          <FontAwesomeIcon icon={faBars} />
-        </div>
+        ></div>
         <div className="SideTab-nav">
           <LayoutItems />
         </div>

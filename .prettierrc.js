@@ -14,4 +14,5 @@ module.exports = {
   requirePragma: false,
   insertPragma: false,
   proseWrap: 'preserve',
+  parser: 'typescript',
 };
