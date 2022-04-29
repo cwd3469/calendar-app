@@ -1,12 +1,6 @@
 import axios, { AxiosInstance } from 'axios';
 import Cookies from 'js-cookie';
 
-const token = Cookies.get('access_token');
-
-console.log(typeof token);
-
-console.log(`Bearer ${token}`);
-
 const instance: AxiosInstance = axios.create({
   baseURL: `http://10.190.241.162:8090`,
   timeout: 5000,
@@ -15,8 +9,10 @@ const instance: AxiosInstance = axios.create({
     accept: 'application/json',
   },
 });
+const token = Cookies.get('access_token');
+console.log(token);
 
-if (token !== undefined) {
+if (token) {
   instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 }
 
@@ -32,8 +28,8 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response) => {
+    console.log(response);
     const res = response;
-
     return res;
   },
   (error) => {

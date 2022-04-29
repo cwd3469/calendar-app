@@ -1,9 +1,9 @@
 import React from 'react';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import Chart2 from './Chart2';
 
 const MainContents = (): JSX.Element => {
   return (
@@ -15,10 +15,9 @@ const MainContents = (): JSX.Element => {
             p: 2,
             display: 'flex',
             flexDirection: 'column',
-            height: 240,
           }}
         >
-          <Chart />
+          <Chart2 />
         </Paper>
       </Grid>
       {/* Recent Deposits */}
@@ -28,7 +27,7 @@ const MainContents = (): JSX.Element => {
             p: 2,
             display: 'flex',
             flexDirection: 'column',
-            height: 240,
+            height: 432,
           }}
         >
           <Deposits />

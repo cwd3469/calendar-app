@@ -4,6 +4,7 @@ import Counter from './Counter';
 import Todo from './Todo';
 import Main from './Mian';
 import Sign from './Sign';
+import Order from './Order';
 import Cookies from 'js-cookie';
 
 const token = Cookies.get('access_token');
@@ -25,9 +26,10 @@ function App(): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Istoken Conponent={<Main />} />} />
-        <Route path="/todo" element={<Istoken Conponent={<Todo />} />} />
-        <Route path="/counter" element={<Istoken Conponent={<Counter />} />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/todo" element={<Todo />} />
+        <Route path="/counter" element={<Counter />} />
+        <Route path="/order" element={<Order />} />
         <Route path="/sign" element={<Sign />} />
       </Routes>
     </BrowserRouter>

@@ -1,11 +1,11 @@
 import React from 'react';
-import MainLayout from '../components/Common/MainLayout';
-import TodoList from '../components/Todo/TodoList';
+import MainLayout from '@components/Common/MainLayout';
+import TodoTemplate from '@components/Todo/TodoTemplate';
 
 const TodoPage = (): JSX.Element => {
   return (
     <MainLayout>
-      <TodoList />
+      <TodoTemplate />
     </MainLayout>
   );
 };

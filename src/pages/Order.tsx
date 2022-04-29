@@ -1,13 +1,13 @@
 import React from 'react';
 import MainLayout from '@components/Common/MainLayout';
-import MainContents from '@components/Main/MainContents';
+import OrderContents from '@components/Order/OrderContents';
 
-const Mian = (): JSX.Element => {
+const Order = () => {
   return (
     <MainLayout>
-      <MainContents />
+      <OrderContents />
     </MainLayout>
   );
 };
 
-export default Mian;
+export default Order;

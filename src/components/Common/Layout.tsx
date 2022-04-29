@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import '../../assets/scss/Layout.scss';
+import '@assets/scss/Layout.scss';
 
 import classnames from 'classnames';
 

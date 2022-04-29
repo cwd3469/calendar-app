@@ -12,7 +12,7 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import instance from '../../utils/axios';
+import instance from '@utils/axios';
 import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
 
@@ -41,12 +41,14 @@ export default function SignInSide() {
       email: data.get('email'),
       password: data.get('password'),
     });
-    console.log(res);
-    const code = res.data.code;
 
     if (res.data.code === 'SUCCESS') {
-      const token = `${res.data.data.access_token}`;
-      Cookies.set('access_token', token, { expires: 1 });
+      const access_token = `${res.data.data.access_token}`;
+      const refresh_token = `${res.data.data.refresh_token}`;
+      const roles = res.data.data.user_roles[0];
+      await Cookies.set('access_token', access_token, { expires: 1 });
+      await Cookies.set('refresh_token', refresh_token, { expires: 1 });
+      await Cookies.set('roles', roles, { expires: 1 });
       navigate('/');
     }
   };

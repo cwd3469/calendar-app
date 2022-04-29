@@ -16,8 +16,10 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import Button from '@mui/material/Button';
 import MainNavItems from './MainNavItems';
-
+import instance from '@utils/axios';
+import Cookies from 'js-cookie';
 //카피라이터
 function Copyright(props: any) {
   return (
@@ -91,6 +93,17 @@ type PropsData = {
   children: JSX.Element;
 };
 
+async function LogoutClick() {
+  const refresh_token = Cookies.get('refresh_token');
+  const res = await instance.post('/users/logout', {
+    refreshToken: refresh_token,
+  });
+  console.log(res);
+  Cookies.remove('refresh_token');
+  Cookies.remove('access_token');
+  Cookies.remove('roles');
+}
+
 //레이아웃
 function MainLayout(props: PropsData) {
   const { children } = props;
@@ -123,9 +136,11 @@ function MainLayout(props: PropsData) {
             >
               <MenuIcon />
             </IconButton>
+
             <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
               Dashboard
             </Typography>
+
             <IconButton color="inherit">
               <Badge badgeContent={4} color="secondary">
                 <NotificationsIcon />
@@ -151,6 +166,7 @@ function MainLayout(props: PropsData) {
           <List component="nav">
             <MainNavItems />
           </List>
+          <Button onClick={LogoutClick}>로그아웃</Button>
         </Drawer>
 
         {/* 페이지 컨텐츠 */}

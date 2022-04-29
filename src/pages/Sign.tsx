@@ -1,5 +1,5 @@
 import React from 'react';
-import SignTemplate from '../components/SIgn/SignTemplate';
+import SignTemplate from '@components/SIgn/SignTemplate';
 
 function Sign() {
   return (
