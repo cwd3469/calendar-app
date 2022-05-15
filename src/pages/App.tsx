@@ -1,38 +1,19 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Counter from './Counter';
-import Todo from './Todo';
+import { Switch, Route } from 'react-router';
 import Main from './Mian';
-import Sign from './Sign';
-import Order from './Order';
-import Cookies from 'js-cookie';
-
-const token = Cookies.get('access_token');
-
-type IsProps = {
-  Conponent: JSX.Element;
-};
-
-const Istoken = (props: IsProps): JSX.Element => {
-  const { Conponent } = props;
-  if (token !== undefined) {
-    return <>{Conponent}</>;
-  } else {
-    return <Navigate to="/sign" replace />;
-  }
-};
-
+import Calendar from './Calendar';
+import User from './User';
+import NotFound from './NotFound';
+import MainLayout from '@components/Common/MainLayout';
 function App(): JSX.Element {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/todo" element={<Todo />} />
-        <Route path="/counter" element={<Counter />} />
-        <Route path="/order" element={<Order />} />
-        <Route path="/sign" element={<Sign />} />
-      </Routes>
-    </BrowserRouter>
+    <MainLayout>
+      <Switch>
+        <Route exact path="/" component={Main} />
+        <Route path="/calendar" component={Calendar} />
+        <Route path="*" component={NotFound} />
+      </Switch>
+    </MainLayout>
   );
 }
 

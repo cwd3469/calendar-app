@@ -3,11 +3,7 @@ import MainLayout from '@components/Common/MainLayout';
 import OrderContents from '@components/Order/OrderContents';
 
 const Order = () => {
-  return (
-    <MainLayout>
-      <OrderContents />
-    </MainLayout>
-  );
+  return <OrderContents />;
 };
 
 export default Order;

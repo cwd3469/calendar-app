@@ -12,50 +12,27 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import instance from '@utils/axios';
-import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
-
-function Copyright(props: any) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import { useAppDispatch } from '@store/hooks';
+import { userLoginDispatch } from '@store/modules/user';
+import { UserLoginInfo } from './type';
 
 const theme = createTheme();
 
-export default function SignInSide() {
-  const navigate = useNavigate();
-
+const SignTemplate = () => {
+  const dispatch = useAppDispatch();
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const res = await instance.post('/users/signin', {
+    const userLoginInfo: UserLoginInfo = {
       email: data.get('email'),
       password: data.get('password'),
-    });
-
-    if (res.data.code === 'SUCCESS') {
-      const access_token = `${res.data.data.access_token}`;
-      const refresh_token = `${res.data.data.refresh_token}`;
-      const roles = res.data.data.user_roles[0];
-      await Cookies.set('access_token', access_token, { expires: 1 });
-      await Cookies.set('refresh_token', refresh_token, { expires: 1 });
-      await Cookies.set('roles', roles, { expires: 1 });
-      navigate('/');
-    }
+    };
+    await dispatch(userLoginDispatch(userLoginInfo));
   };
 
   return (
     <ThemeProvider theme={theme}>
-      <Grid container component="main" sx={{ height: '100vh' }}>
+      <Grid container component="main" sx={{ height: '100vh' }} data-testid="sign-page">
         <CssBaseline />
         <Grid
           item
@@ -96,6 +73,7 @@ export default function SignInSide() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
+                data-testid="email"
                 autoFocus
               />
               <TextField
@@ -106,6 +84,7 @@ export default function SignInSide() {
                 label="Password"
                 type="password"
                 id="password"
+                data-testid="password"
                 autoComplete="current-password"
               />
               <FormControlLabel
@@ -127,11 +106,11 @@ export default function SignInSide() {
                   </Link>
                 </Grid>
               </Grid>
-              <Copyright sx={{ mt: 5 }} />
             </Box>
           </Box>
         </Grid>
       </Grid>
     </ThemeProvider>
   );
-}
+};
+export default SignTemplate;

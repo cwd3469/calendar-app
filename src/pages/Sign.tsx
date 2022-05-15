@@ -1,12 +1,11 @@
 import React from 'react';
-import SignTemplate from '@components/SIgn/SignTemplate';
-
+import SignTemplate from '@components/Sign/SignTemplate';
+import { selectuserLogin } from '@store/modules/user';
+import { useAppSelector } from '@store/hooks';
 function Sign() {
-  return (
-    <div>
-      <SignTemplate />
-    </div>
-  );
+  const Login = useAppSelector(selectuserLogin);
+
+  return <SignTemplate />;
 }
 
 export default Sign;

@@ -1,20 +1,16 @@
 import axios, { AxiosInstance } from 'axios';
-import Cookies from 'js-cookie';
 
 const instance: AxiosInstance = axios.create({
-  baseURL: `http://10.190.241.162:8090`,
-  timeout: 5000,
-  headers: {
-    'content-type': 'application/json;charset=UTF-8',
-    accept: 'application/json',
-  },
+  baseURL: `${process.env.REACT_APP_API_URL}`,
+  timeout: 3000,
 });
-const token = Cookies.get('access_token');
-console.log(token);
 
-if (token) {
-  instance.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-}
+// if (isLogin()) {
+//   let type = store.getState().user.userInfo.token_type;
+//   let refresh = store.getState().user.userInfo.access_token;
+//   let token = `${type} ${refresh}`;
+//   instance.defaults.headers.common['Authorization'] = token;
+// }
 
 instance.interceptors.request.use(
   (config) => {
@@ -28,7 +24,6 @@ instance.interceptors.request.use(
 
 instance.interceptors.response.use(
   (response) => {
-    console.log(response);
     const res = response;
     return res;
   },

@@ -17,6 +17,12 @@
          "@utils/*":[
             "utils/*"
          ],
+         "@api/*":[
+            "api/*"
+         ],
+         "@mocks/*":[
+            "mocks/*"
+         ],
          "@components/*":[
             "components/*"
          ]

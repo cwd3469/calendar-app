@@ -1,45 +1,55 @@
 import * as React from 'react';
-import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
-import MuiDrawer from '@mui/material/Drawer';
-import Box from '@mui/material/Box';
 import type { AppBarProps as MuiAppBarProps } from '@mui/material/AppBar';
-import MuiAppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
-import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
-import MenuIcon from '@mui/icons-material/Menu';
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import Button from '@mui/material/Button';
-import MainNavItems from './MainNavItems';
-import instance from '@utils/axios';
-import Cookies from 'js-cookie';
-//카피라이터
-function Copyright(props: any) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}.
-    </Typography>
-  );
-}
-
-// 사이드바 길이
-const drawerWidth = 240;
+import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
+import {
+  Drawer as MuiDrawer,
+  AppBar as MuiAppBar,
+  CssBaseline,
+  Toolbar,
+  List,
+  Box,
+  Typography,
+  Divider,
+  IconButton,
+  Badge,
+  Container,
+} from '@mui/material';
+import {
+  Menu as MenuIcon,
+  ChevronLeft as ChevronLeftIcon,
+  Notifications as NotificationsIcon,
+  Logout,
+} from '@mui/icons-material';
+import LayoutItems from './LayoutItems';
 
 // open type
 interface AppBarProps extends MuiAppBarProps {
   readonly open?: boolean;
 }
+
+type PropsData = {
+  children: JSX.Element;
+};
+
+// 사이드바 길이
+const drawerWidth = 240;
+
+const mdTheme = createTheme({
+  palette: {
+    primary: {
+      main: '#1976d2',
+      contrastText: 'white',
+    },
+    secondary: {
+      main: '#fff',
+      contrastText: '000',
+    },
+    error: {
+      main: '#ef5350',
+      contrastText: 'white',
+    },
+  },
+});
 
 //mui 커스텀 컴퍼넌트  => 레이아웃 헤더
 const AppBar = styled(MuiAppBar, {
@@ -49,14 +59,6 @@ const AppBar = styled(MuiAppBar, {
   transition: theme.transitions.create(['width', 'margin'], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
   }),
 }));
 
@@ -87,26 +89,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   })
 );
 
-const mdTheme = createTheme();
-
-type PropsData = {
-  children: JSX.Element;
-};
-
-async function LogoutClick() {
-  const refresh_token = Cookies.get('refresh_token');
-  const res = await instance.post('/users/logout', {
-    refreshToken: refresh_token,
-  });
-  console.log(res);
-  Cookies.remove('refresh_token');
-  Cookies.remove('access_token');
-  Cookies.remove('roles');
-}
-
 //레이아웃
 function MainLayout(props: PropsData) {
   const { children } = props;
+
   //사이드바 온오프 기능
   const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
@@ -118,10 +104,11 @@ function MainLayout(props: PropsData) {
       <Box sx={{ display: 'flex', minWidth: '860px' }}>
         <CssBaseline />
         {/* 레이아웃 헤더 */}
-        <AppBar position="absolute" open={open}>
+        <AppBar position="absolute" open={open} color="secondary">
           <Toolbar
             sx={{
-              pr: '24px', // keep right padding when drawer closed
+              pr: '24px',
+              minHeight: '48px',
             }}
           >
             <IconButton
@@ -131,20 +118,21 @@ function MainLayout(props: PropsData) {
               onClick={toggleDrawer}
               sx={{
                 marginRight: '36px',
-                ...(open && { display: 'none' }),
               }}
             >
-              <MenuIcon />
+              <MenuIcon fontSize="small" />
             </IconButton>
-
-            <Typography component="h1" variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-              Dashboard
+            <Typography
+              component="h6"
+              variant="body2"
+              color="inherit"
+              noWrap
+              sx={{ flexGrow: 1, textAlign: 'center' }}
+            >
+              나만의 다이어리
             </Typography>
-
             <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
+              <Logout fontSize="small" />
             </IconButton>
           </Toolbar>
         </AppBar>
@@ -157,16 +145,16 @@ function MainLayout(props: PropsData) {
               justifyContent: 'flex-end',
               px: [1],
             }}
-          >
-            <IconButton onClick={toggleDrawer}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </Toolbar>
+          ></Toolbar>
           <Divider />
-          <List component="nav">
-            <MainNavItems />
+          <List
+            component="nav"
+            sx={{
+              padding: '0px',
+            }}
+          >
+            <LayoutItems />
           </List>
-          <Button onClick={LogoutClick}>로그아웃</Button>
         </Drawer>
 
         {/* 페이지 컨텐츠 */}
@@ -181,9 +169,8 @@ function MainLayout(props: PropsData) {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
             {children}
-            <Copyright sx={{ pt: 4 }} />
           </Container>
         </Box>
       </Box>

@@ -7,37 +7,37 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
-import { useNavigate } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 const MainNavItems = () => {
-  const navigate = useNavigate();
+  const history = useHistory();
   return (
     <>
-      <ListItemButton onClick={() => navigate('/')}>
+      <ListItemButton onClick={() => history.push('/')}>
         <ListItemIcon>
           <DashboardIcon />
         </ListItemIcon>
         <ListItemText primary="홈" />
       </ListItemButton>
-      <ListItemButton onClick={() => navigate('/todo')}>
+      <ListItemButton onClick={() => history.push('/todo')}>
         <ListItemIcon>
           <ShoppingCartIcon />
         </ListItemIcon>
-        <ListItemText primary="Todo" />
+        <ListItemText primary="Test" />
       </ListItemButton>
-      <ListItemButton onClick={() => navigate('/counter')}>
+      <ListItemButton onClick={() => history.push('/counter')}>
         <ListItemIcon>
           <PeopleIcon />
         </ListItemIcon>
         <ListItemText primary="Customers" />
       </ListItemButton>
-      <ListItemButton onClick={() => navigate('/order')}>
+      <ListItemButton onClick={() => history.push('/order')}>
         <ListItemIcon>
           <BarChartIcon />
         </ListItemIcon>
         <ListItemText primary="Orders" />
       </ListItemButton>
-      <ListItemButton onClick={() => navigate('/')}>
+      <ListItemButton onClick={() => history.push('/')}>
         <ListItemIcon>
           <LayersIcon />
         </ListItemIcon>

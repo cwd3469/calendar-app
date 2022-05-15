@@ -21,6 +21,15 @@ export const pdfContent: any = [
     text: 'It is possible to apply multiple styles, by passing an array. This paragraph uses two styles: quote and small. When multiple styles are provided, they are evaluated in the specified order which is important in case they define the same properties',
     style: ['quote', 'small'],
   },
-]
+];
 
-
+export const userInfo = {
+  code: 'SUCCESS',
+  access_token: 'access_token',
+  refresh_token: 'refresh_token',
+  token_type: 'Eearer',
+  user_roles: ['CREATE', 'READ', 'UPDATAE', 'DELETE'],
+  user_permissions: 'ADMIN',
+  expires_in: 500,
+  refresh_expires_in: 1000,
+};
