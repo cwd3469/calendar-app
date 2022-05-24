@@ -2,7 +2,6 @@ import React from 'react';
 import { Switch, Route } from 'react-router';
 import Main from './Mian';
 import Calendar from './Calendar';
-import User from './User';
 import NotFound from './NotFound';
 import MainLayout from '@components/Common/MainLayout';
 function App(): JSX.Element {

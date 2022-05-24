@@ -1,8 +1,5 @@
 import React from 'react';
 import { Route, RouteComponentProps, Switch } from 'react-router';
-import UserStore from '@components/User/UserStore';
-import UserDormant from '@components/User/UserDormant';
-import UserPacer from '@components/User/UserPacer';
 
 interface MatchParams {
   postId: string;
